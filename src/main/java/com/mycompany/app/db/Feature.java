@@ -1,9 +1,6 @@
 package com.mycompany.app.db;
 
-import com.mycompany.app.model.Result;
-import com.mycompany.app.model.Student;
-import com.mycompany.app.model.StudentResult;
-import com.mycompany.app.model.Subject;
+import com.mycompany.app.model.*;
 
 import java.sql.Connection;
 import java.util.Date;
@@ -11,8 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Vector;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class Feature implements iFeature {
 
@@ -21,6 +19,7 @@ public class Feature implements iFeature {
     Subject csdl = new Subject("CSDL", "Cơ sở dữ liệu", 3);
     Subject tin = new Subject("THDC", "Tin học đại cương", 3);
     Subject toancc = new Subject("TA1", "Toán cao cấp A1", 4);
+    public ArrayList<Subject> subjects = new ArrayList<>();
 
     Result csdlResult = new Result(student.getCode(), csdl.getCode(), 1, 2, 3);
     Result tinResult = new Result(student.getCode(), tin.getCode(), 5, 2, 0);
@@ -29,9 +28,14 @@ public class Feature implements iFeature {
    public ArrayList<Result> resultList = new ArrayList<>();
 
 
-
-
-
+    public Feature() {
+        subjects.add(csdl);
+        subjects.add(tin);
+        subjects.add(toancc);
+        resultList.add(csdlResult);
+        resultList.add(tinResult);
+        resultList.add(toanccResult);
+    }
 
     @Override
     public Vector findPointByID(int maSV) {
@@ -108,19 +112,13 @@ public class Feature implements iFeature {
     }
     
     public ArrayList<StudentResult> getAllResult() {
-    
-       if(resultList.isEmpty()) {
-           resultList.add(csdlResult);
-           resultList.add(tinResult);
-           resultList.add(toanccResult);
-       }
        ArrayList<StudentResult> listStudentResult = new ArrayList<>();
        listStudentResult.add(new StudentResult(student, resultList));
-
         return listStudentResult;
     }
-    
-    public void insert(Student s) {
+
+    @Override
+    public boolean insertStudent(Student s) {
 //        try {
 //            query("SET IDENTITY_INSERT Sinhvien ON");
 //
@@ -129,10 +127,29 @@ public class Feature implements iFeature {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
+
+        return true;
     }
-    
+
+    @Override
+    public Student getStudent(String code) {
+        return null;
+    }
+
+    @Override
+    public Department getDepartment(String code) {
+        return null;
+    }
+
+    @Override
+    public Subject getSubject(String code) {
+        return subjects.stream().filter(subject -> subject.getCode().equals(code)).collect(Collectors.toList()).get(0) ;
+    }
+
+
     public static void main(String[] args) {
-        new Feature().insert(new Student());
+        Subject a = new Feature().getSubject("CSDL");
+        System.out.println(a.getCode());
     }
     
     public ResultSet query(String query) throws Exception {
