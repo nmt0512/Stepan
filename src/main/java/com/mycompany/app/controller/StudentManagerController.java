@@ -9,6 +9,7 @@ import java.util.ArrayList;
  * @author Admin
  */
 public class StudentManagerController {
+    private StudentManagerController(){};
     private static StudentManagerController instance;
     public static StudentManagerController getInstance() {
         if (instance == null) {

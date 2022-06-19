@@ -6,7 +6,6 @@
 package com.mycompany.app.model;
 
 /**
- *
  * @author leduc
  */
 public class Result {
@@ -66,5 +65,13 @@ public class Result {
 
     public void setPoint3(float point3) {
         this.point3 = point3;
+    }
+
+    /**
+     * Get average point of this result
+     * @return
+     */
+    public float getAveragePoint() {
+        return (float) (point1 * 0.1 + point2 * 0.2 + point3 * 0.7);
     }
 }
