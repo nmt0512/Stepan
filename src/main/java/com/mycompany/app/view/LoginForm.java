@@ -164,7 +164,7 @@ public class LoginForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Password is empty");
             return;
         }
-        var respone = loginControl.login(username, password);
+        LoginController.LoginRespone respone = loginControl.login(username, password);
        
         switch (respone) {
             case SUSSCESS: 

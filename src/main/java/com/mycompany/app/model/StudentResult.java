@@ -4,7 +4,7 @@
  */
 package com.mycompany.app.model;
 
-import java.util.HashMap;
+import java.util.List;
 
 /**
  *
@@ -13,28 +13,28 @@ import java.util.HashMap;
 public class StudentResult {
     private Student student;
 
-    public StudentResult(Student student, HashMap<Integer, Float> resultMap) {
+    public StudentResult(Student student, List<Result> resultList) {
         this.student = student;
-        this.resultMap = resultMap;
+        this.resultList = resultList;
     }
-    private HashMap<Integer, Float> resultMap;
+    private List<Result> resultList;
 
     public Student getStudent() {
         return student;
-    }
-
-    public HashMap<Integer, Float> getResultMap() {
-        return resultMap;
     }
 
     public void setStudent(Student student) {
         this.student = student;
     }
 
-    public void setResultMap(HashMap<Integer, Float> resultMap) {
-        this.resultMap = resultMap;
+    public List<Result> getResultList() {
+        return resultList;
     }
-     
+
+    public void setResultList(List<Result> resultList) {
+        this.resultList = resultList;
+    }
+
     
     
 }

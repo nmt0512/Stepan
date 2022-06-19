@@ -11,42 +11,41 @@ package com.mycompany.app.model;
  */
 public class Subject {
 
-    private int maMH;
-    private String tenMH;
-    private int dvht;
+    private String code;
+    private String name;
 
-    public int getMaMH() {
-        return maMH;
+    public Subject(String code, String name, int creditNumber) {
+        this.code = code;
+        this.name = name;
+        this.creditNumber = creditNumber;
+    }
+    private int creditNumber;
+
+    public String getCode() {
+        return code;
     }
 
-    public void setMaMH(int maMH) {
-        this.maMH = maMH;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getTenMH() {
-        return tenMH;
+    public String getName() {
+        return name;
     }
 
-    public void setTenMH(String tenMH) {
-        this.tenMH = tenMH;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getDvht() {
-        return dvht;
+    public int getCreditNumber() {
+        return creditNumber;
     }
 
-    public void setDvht(int dvht) {
-        this.dvht = dvht;
-    }
-
-    public Subject(int maMH, String tenMH, int dvht) {
-        this.maMH = maMH;
-        this.tenMH = tenMH;
-        this.dvht = dvht;
+    public void setCreditNumber(int creditNumber) {
+        this.creditNumber = creditNumber;
     }
 
     public Subject() {
-
     }
 
-}
+ }
