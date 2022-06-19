@@ -12,13 +12,13 @@ import java.util.List;
  */
 public class StudentResult {
     private Student student;
+     private List<Result> resultList;
 
     public StudentResult(Student student, List<Result> resultList) {
         this.student = student;
         this.resultList = resultList;
     }
-    private List<Result> resultList;
-
+   
     public Student getStudent() {
         return student;
     }

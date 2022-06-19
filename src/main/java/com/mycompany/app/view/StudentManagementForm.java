@@ -19,6 +19,7 @@ import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import com.mycompany.app.view.addsvForm;
+import java.util.ArrayList;
 
 public class StudentManagementForm extends javax.swing.JFrame {
 
@@ -55,12 +56,12 @@ public class StudentManagementForm extends javax.swing.JFrame {
      */
     private Vector studentResultToVector(StudentResult studentResult) {
         var v = new Vector();
-        v.add(studentResult.getStudent().getMaSV());
-        v.add(studentResult.getStudent().getTenSV());
-        v.add(studentResult.getStudent().getGioitinh());
-        v.add(studentResult.getStudent().getLop());
-        v.add(studentResult.getStudent().getTenSV());
-        v.add(studentResult.getStudent().getNgaysinh());
+//        v.add(studentResult.getStudent().getMaSV());
+//        v.add(studentResult.getStudent().getTenSV());
+//        v.add(studentResult.getStudent().getGioitinh());
+//        v.add(studentResult.getStudent().getLop());
+//        v.add(studentResult.getStudent().getTenSV());
+//        v.add(studentResult.getStudent().getNgaysinh());
         return v;
     }
 
@@ -290,14 +291,47 @@ public class StudentManagementForm extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-         tableSV.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Mã sinh viên", "Họ tên", "Điểm quá trình", "Điểm thi", "Số tín chỉ"
-            }
-        ));
+//          Vector cols=new Vector();
+//        cols.add("Tên Hàng");
+//        cols.add("Số lượng");
+//        cols.add("Đơn giá");
+//        XuLiFile xl=new XuLiFile();
+//        dsHH=xl.readFile("d:Hanghoa.dat");
+//        Vector rows=new Vector<>();
+//        for (HangHoa hh:dsHH) {
+//            Vector  row=new Vector<>();
+//            row.add(hh.getTen());
+//            row.add(hh.getSoLuong());
+//            row.add(hh.getDonGia());
+//          rows.add(row);
+//        }
+//        table.setModel(new DefaultTableModel(rows,cols));
+        StudentManagerController controler=StudentManagerController.getInstance();
+         ArrayList<StudentResult> list=controler.getAllResult();
+       Vector cols=new Vector();
+       cols.add("Mã SV");
+       cols.add("Họ tên");
+       cols.add("Lớp");
+       cols.add("Điểm thành phần 1");
+       cols.add("Điểm thành phần 2");
+       cols.add("Điểm thi");
+       Vector rows=new Vector<>();
+       for(StudentResult result:list)
+       {
+           int i=0;
+           Vector  row=new Vector<>();
+           row.add(result.getStudent().getCode());
+           row.add(result.getStudent().getName());
+           row.add(result.getStudent().getKlass());
+           row.add(result.getResultList().get(i).getPoint1());
+            row.add(result.getResultList().get(i).getPoint2());
+             row.add(result.getResultList().get(i).getPoint3());
+             i++;
+             rows.add(row);
+       }
+         tableSV.setModel(new DefaultTableModel(rows,cols)); 
+         
+         
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
