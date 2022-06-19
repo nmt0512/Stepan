@@ -1,20 +1,37 @@
 package com.mycompany.app.db;
 
+import com.mycompany.app.model.Result;
 import com.mycompany.app.model.Student;
 import com.mycompany.app.model.StudentResult;
+import com.mycompany.app.model.Subject;
 
-import java.sql.Statement;
 import java.sql.Connection;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Feature implements iFeature {
+
+    Student student = new Student("CT0402000", "CT", "Thieu", 0, "Ha Noi", "CT4B", new Date());
+
+    Subject csdl = new Subject("CSDL", "Cơ sở dữ liệu", 3);
+    Subject tin = new Subject("THDC", "Tin học đại cương", 3);
+    Subject toancc = new Subject("TA1", "Toán cao cấp A1", 4);
+
+    Result csdlResult = new Result(student.getCode(), csdl.getCode(), 1, 2, 3);
+    Result tinResult = new Result(student.getCode(), tin.getCode(), 5, 2, 0);
+    Result toanccResult = new Result(student.getCode(), toancc.getCode(), 7, 5, 2);
+
+   public ArrayList<Result> resultList = new ArrayList<>();
+
+
+
+
+
 
     @Override
     public Vector findPointByID(int maSV) {
@@ -64,47 +81,54 @@ public class Feature implements iFeature {
 
     @Override
     public void updateStudent(Student stu) {
-        Connection con = null;
-        Statement statement = null;
-        try {
-            con = getDBconnection.getConnection();
-            con.setAutoCommit(false);
-            statement = con.createStatement();
-            statement.executeUpdate("update Sinhvien values(" + stu.getMaSV() + stu.getTenSV() + stu.getGioitinh() + stu.getQue() + stu.getLop() + ")");
-            con.commit();
-        } catch (Exception e) {
-            if (con != null)
-			try {
-                con.rollback();
-            } catch (SQLException ex) {
-                e.printStackTrace();
-            }
-        } finally {
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(Feature.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
+//        Connection con = null;
+//        Statement statement = null;
+//        try {
+//            con = getDBconnection.getConnection();
+//            con.setAutoCommit(false);
+//            statement = con.createStatement();
+//            statement.executeUpdate("update Sinhvien values(" + stu.getMaSV() + stu.getTenSV() + stu.getGioitinh() + stu.getQue() + stu.getLop() + ")");
+//            con.commit();
+//        } catch (Exception e) {
+//            if (con != null)
+//			try {
+//                con.rollback();
+//            } catch (SQLException ex) {
+//                e.printStackTrace();
+//            }
+//        } finally {
+//            if (statement != null) {
+//                try {
+//                    statement.close();
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(Feature.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//        }
     }
     
     public ArrayList<StudentResult> getAllResult() {
-        var result = new HashMap<Integer, Float>();
-        result.put(1, 4.5f);
-        var studentResult = new StudentResult(new Student(0, "Thieu", "Nam", "Thai Nguyen", "CT4B", "10/12/2001"), result);
-        var listStudentResult = new ArrayList<StudentResult>();
-        listStudentResult.add(studentResult);
+    
+       if(resultList.isEmpty()) {
+           resultList.add(csdlResult);
+           resultList.add(tinResult);
+           resultList.add(toanccResult);
+       }
+       ArrayList<StudentResult> listStudentResult = new ArrayList<>();
+       listStudentResult.add(new StudentResult(student, resultList));
+
         return listStudentResult;
     }
     
     public void insert(Student s) {
-        try {
-            var rs = query("insert into Sinhvien values('CT01', 'THieu', 'Nam', 'Thai Nguyen', 'CT4B', '10/10/2002')" );
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            query("SET IDENTITY_INSERT Sinhvien ON");
+//
+//
+//ResultSet rs = query("insert into Sinhvien values('CT01', 'THieu', 'Nam', 'Thai Nguyen', 'CT4B', '10/10/2002')" );
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
     
     public static void main(String[] args) {
@@ -112,9 +136,9 @@ public class Feature implements iFeature {
     }
     
     public ResultSet query(String query) throws Exception {
-        var con = getDBconnection.getConnection();
-        var statement = con.prepareStatement(query);
-        var rs = statement.executeQuery();
+        Connection con = getDBconnection.getConnection();
+        PreparedStatement statement = con.prepareStatement(query);
+        ResultSet rs = statement.executeQuery();
         return rs;
     }
 

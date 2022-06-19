@@ -5,78 +5,95 @@
  */
 package com.mycompany.app.model;
 
+import java.util.Date;
+import javax.xml.crypto.Data;
+
 /**
  *
  * @author leduc
  */
 public class Student {
 
-    private int maSV;
-    private String tenSV;
-    private String gioitinh;
-    private String que;
-    private String lop;
-    private String ngaysinh;
+    private String code;
+    private String departmentCodeString;
+    private String name;
+    private int gender;
+    private String address;
+    // Avoid conflict with class keyword
+    private String klass;
+    private Date birthday;
 
-    public Student(int maSV, String tenSV, String gioitinh, String que, String lop, String ngaysinh) {
-        this.maSV = maSV;
-        this.tenSV = tenSV;
-        this.gioitinh = gioitinh;
-        this.que = que;
-        this.lop = lop;
-        this.ngaysinh = ngaysinh;
+    public Student(String code, String departmentCodeString, String name, int gender, String address, String klass, Date birthday) {
+        this.code = code;
+        this.departmentCodeString = departmentCodeString;
+        this.name = name;
+        this.gender = gender;
+        this.address = address;
+        this.klass = klass;
+        this.birthday = birthday;
     }
 
     public Student() {
-
     }
 
-    public int getMaSV() {
-        return maSV;
+    public String getCode() {
+        return code;
     }
 
-    public void setMaSV(int maSV) {
-        this.maSV = maSV;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getTenSV() {
-        return tenSV;
+    public String getDepartmentCodeString() {
+        return departmentCodeString;
     }
 
-    public void setTenSV(String tenSV) {
-        this.tenSV = tenSV;
+    public void setDepartmentCodeString(String departmentCodeString) {
+        this.departmentCodeString = departmentCodeString;
     }
 
-    public String getGioitinh() {
-        return gioitinh;
+    public String getName() {
+        return name;
     }
 
-    public void setGioitinh(String gioitinh) {
-        this.gioitinh = gioitinh;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getQue() {
-        return que;
+    public int getGender() {
+        return gender;
     }
 
-    public void setQue(String que) {
-        this.que = que;
+    public void setGender(int gender) {
+        this.gender = gender;
     }
 
-    public String getLop() {
-        return lop;
+    public String getAddress() {
+        return address;
     }
 
-    public void setLop(String lop) {
-        this.lop = lop;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getNgaysinh() {
-        return ngaysinh;
+    public String getKlass() {
+        return klass;
     }
 
-    public void setNgaysinh(String ngaysinh) {
-        this.ngaysinh = ngaysinh;
+    public void setKlass(String klass) {
+        this.klass = klass;
     }
 
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    
+    
+  
+   
 }
