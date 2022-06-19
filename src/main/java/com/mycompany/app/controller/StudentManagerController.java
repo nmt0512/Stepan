@@ -1,8 +1,14 @@
 package com.mycompany.app.controller;
 
 import com.mycompany.app.db.Feature;
+import com.mycompany.app.model.Department;
 import com.mycompany.app.model.StudentResult;
+import com.mycompany.app.model.Subject;
+
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -33,6 +39,24 @@ public class StudentManagerController {
         });
         return studentResult;
     }
-    
+
+    /**
+     * Get all department need this subject
+     * @param subject
+     * @return
+     */
+    public List<Department> departmentsInSubject(Subject subject) {
+        String[] departmentCodes = subject.getDepartmentList().split("_");
+        return Arrays.stream(departmentCodes).map(code -> dao.getDepartment(code)).collect(Collectors.toList());
+    }
+
+    /**
+     * Get all subject needed for {@linkplain   Department}
+     * @param department
+     * @return
+     */
+    public List<Subject> subjectInDepartment(Department department) {
+        return dao.getSubjects().stream().filter(subject -> subject.getDepartmentList().contains(department.getCode())).collect(Collectors.toList());
+    }
     
 }
