@@ -1,6 +1,7 @@
 package com.mycompany.app.db;
 
 import com.mycompany.app.model.Department;
+import com.mycompany.app.model.Result;
 import com.mycompany.app.model.Student;
 import com.mycompany.app.model.Subject;
 
@@ -17,14 +18,26 @@ public interface iFeature {
 
     Student getStudent(String code);
 
+    boolean insertDepartment(Department department);
+
+    void deleteDepartment(Department department);
+
     Department getDepartment(String code);
 
 
 
+    void insertResult(Result result);
+
+    void getResult(String studentCode, String subjectCode);
+
+    void getAllResultOfStudent(String student);
 
 
 
 
+    boolean insertSubject(Subject subject);
+
+    void deleteSubject(Subject subject);
 
     Subject getSubject(String code);
 
