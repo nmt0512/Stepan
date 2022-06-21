@@ -1,0 +1,27 @@
+use QLSV
+
+create table Student (
+Id varchar(10) primary key,
+DepartmentId varchar(8) not null,
+Name nvarchar(255) not null,
+Gender int check(Gender=0 or Gender=1),
+Address nvarchar(255),
+Class varchar(6),
+Birthday date
+)
+
+create table Subject (
+SubjectId varchar(10) primary key,
+SubjectName nvarchar(100) not null,
+DepartmentList varchar(100) not null,
+CreditNum int
+)
+
+create table Result (
+StudentId varchar(10) foreign key references Student(Id),
+SubjectId varchar(10) foreign key references Subject(SubjectId),
+Point1 float,
+Point2 float,
+Point3 float,
+constraint PK_RS primary key(StudentId,SubjectId)
+)
